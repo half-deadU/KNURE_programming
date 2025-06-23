@@ -1,18 +1,17 @@
-def word_count(text):
-    words = text.lower().split()
-    word_dict = {}
-    for word in words:
+def word_count(input_text):
+    word_list = input_text.lower().split()
+    word_stats = {}
+    for word in word_list:
         word = word.strip(".,!?\"'():;")
-        word_dict[word] = word_dict.get(word, 0) + 1
-    return word_dict
+        word_stats[word] = word_stats.get(word, 0) + 1
+    return word_stats
 
-text = input("Введіть текст: ").strip().lower()
+input_text = input("Введіть текст: ").strip().lower()
+word_stats = word_count(input_text)
+frequent_items = [word for word, count in word_stats.items() if count > 3]
+
+print("Даний текст:", input_text)
+print("Словник тексту:", word_stats)
+print("Слова, що зустрічаються більше 3 разів:", frequent_items)
+
 """Це абсолютно точно не текст, що абсолютно точно не використовується в тесті для не абсолютно точно не точної прорами."""
-
-counts = word_count(text)
-frequent_words = [word for word, count in counts.items() if count > 3]
-
-print("Даний текст:", text)
-print("Словник тексту:", counts)
-print("Слова, що зустрічаються більше 3 разів:", frequent_words)
-
