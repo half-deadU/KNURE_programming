@@ -1,29 +1,29 @@
-def analyze_log_file(log_file_path):
-    response_codes = {}
+def analyze_log_file(input_path):
+    results = {}
 
     try:
-        with open(log_file_path, 'r') as file:
+        with open(input_path, 'r') as file:
             for line in file:
                 parts = line.split()
                 if len(parts) >= 9:
                     status_code = parts[8]
                     if status_code.isdigit():
-                        response_codes[status_code] = response_codes.get(status_code, 0) + 1
+                        results[status_code] = results.get(status_code, 0) + 1
 
     except FileNotFoundError:
-        print(f"Помилка: файл '{log_file_path}' не знайдено.")
+        print(f"Помилка: файл '{input_path}' не знайдено.")
     except IOError:
-        print(f"Помилка: не вдалося прочитати файл '{log_file_path}'.")
+        print(f"Помилка: не вдалося прочитати файл '{input_path}'.")
 
-    return response_codes
+    return results
 
 if __name__ == "__main__":
-    path = input("Введіть шлях до лог-файлу: ").strip()
-    result = analyze_log_file(path)
+    input_path = input("Введіть шлях до лог-файлу: ").strip()
+    results = analyze_log_file(input_path)
 
-    if result:
+    if results:
         print("\nСтатистика кодів відповіді HTTP:")
-        for code, count in sorted(result.items()):
+        for code, count in sorted(results.items()):
             print(f"Код {code}: {count}")
 
 """C:\nya_local\apache_logs.txt"""
