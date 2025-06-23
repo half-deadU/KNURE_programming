@@ -1,22 +1,22 @@
-tasks = {
+task_list = {
     "Зробити лабораторну": "в процесі",
     "Завантажити дані": "очікує",
     "Забути на пів-року": "виконано"
 }
 
-def update_task(name, new_status):
-    tasks[name] = new_status
+def update_task(task_name, task_status):
+    task_list[task_name] = task_status
 
-def remove_task(name):
-    if name in tasks:
-        del tasks[name]
+def remove_task(task_name):
+    if task_name in task_list:
+        del task_list[task_name]
 
 while True:
-    pending_tasks = [task for task, status in tasks.items() if status == "очікує"]
+    pending_tasks = [t for t, s in task_list.items() if s == "очікує"]
 
     print("\nПоточні задачі:")
-    for name, status in tasks.items():
-        print(f" - {name}: {status}")
+    for task_name, task_status in task_list.items():
+        print(f" - {task_name}: {task_status}")
     print("Задачі зі статусом 'очікує':", pending_tasks)
 
     action = input("\nВведіть дію (додати/видалити/змінити/вийти): ").strip().lower()
@@ -24,32 +24,24 @@ while True:
     if action == "вийти":
         break
     elif action == "додати":
-        name = input("Введіть назву нової задачі: ").strip()
-        status = input("Введіть статус (очікує / в процесі / виконано): ").strip().lower()
-        if status not in ["очікує", "в процесі", "виконано"]:
-            print("Недійсний статус. Використано 'очікує' за замовчуванням.")
-            status = "очікує"
-        update_task(name, status)
+        task_name = input("Введіть назву нової задачі: ").strip()
+        task_status = input("Введіть статус: ").strip().lower()
+        if task_status not in ["очікує", "в процесі", "виконано"]:
+            task_status = "очікує"
+        update_task(task_name, task_status)
     elif action == "видалити":
-        name = input("Введіть назву задачі для видалення: ").strip()
-        if name in tasks:
-            remove_task(name)
-        else:
-            print("Задачу не знайдено.")
+        task_name = input("Введіть назву задачі для видалення: ").strip()
+        remove_task(task_name)
     elif action == "змінити":
-        name = input("Введіть назву задачі для зміни статусу: ").strip()
-        if name in tasks:
-            new_status = input("Введіть новий статус (очікує / в процесі / виконано): ").strip().lower()
-            if new_status in ["очікує", "в процесі", "виконано"]:
-                update_task(name, new_status)
-            else:
-                print("Недійсний статус.")
-        else:
-            print("Задачу не знайдено.")
+        task_name = input("Введіть назву задачі: ").strip()
+        if task_name in task_list:
+            task_status = input("Введіть новий статус: ").strip().lower()
+            if task_status in ["очікує", "в процесі", "виконано"]:
+                update_task(task_name, task_status)
     else:
-        print("Невідома дія. Введіть 'додати', 'видалити', 'змінити' або 'вийти'.")
+        print("Невідома дія.")
 
 print("\nФінальний список задач:")
-for name, status in tasks.items():
-    print(f" - {name}: {status}")
+for task_name, task_status in task_list.items():
+    print(f" - {task_name}: {task_status}")
 print("Задачі зі статусом 'очікує':", pending_tasks)
