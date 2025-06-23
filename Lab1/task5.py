@@ -3,15 +3,15 @@ import hashlib
 user_db = {
     "ivan123": {
         "password": hashlib.md5("qwerty123".encode()).hexdigest(),
-        "full_name": "Іван Іванович Іваненко"
+        "full_name": "Ярослав Скубіш Ігорович"
     },
     "maria456": {
         "password": hashlib.md5("12345".encode()).hexdigest(),
-        "full_name": "Марія Петрівна Коваль"
+        "full_name": "Олег Скиба Олегович"
     },
     "oleg789": {
         "password": hashlib.md5("password789".encode()).hexdigest(),
-        "full_name": "Олег Миколайович Сидорчук"
+        "full_name": "Ярослав Квадрат Ярославович"
     }
 }
 
