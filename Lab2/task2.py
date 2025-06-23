@@ -1,27 +1,28 @@
 import hashlib
 
-def generate_file_hashes(*file_paths):
-    hashes = {}
-    for path in file_paths:
+def generate_file_hashes(*input_paths):
+    results = {}
+    for input_path in input_paths:
         try:
-            with open(path, 'rb') as f:
+            with open(input_path, 'rb') as f:
                 file_content = f.read()
                 sha256_hash = hashlib.sha256(file_content).hexdigest()
-                hashes[path] = sha256_hash
+                results[input_path] = sha256_hash
         except FileNotFoundError:
-            print(f"Помилка: файл '{path}' не знайдено.")
+            print(f"Помилка: файл '{input_path}' не знайдено.")
         except IOError:
-            print(f"Помилка: не вдалося прочитати файл '{path}'.")
-    return hashes
+            print(f"Помилка: не вдалося прочитати файл '{input_path}'.")
+    return results
 
 if __name__ == "__main__":
     print("Введіть шляхи до файлів через кому:")
-    input_paths = input().strip()
-    paths = [p.strip() for p in input_paths.split(',') if p.strip()]
+    input_paths = [p.strip() for p in input().strip().split(',') if p.strip()]
 
-    results = generate_file_hashes(*paths)
+    results = generate_file_hashes(*input_paths)
 
     if results:
         print("\nХеші файлів (SHA-256):")
-        for file_path, file_hash in results.items():
-            print(f"{file_path}: {file_hash}")
+        for input_path, file_hash in results.items():
+            print(f"{input_path}: {file_hash}")
+
+""""""
