@@ -1,20 +1,20 @@
 sales = [
-    {"продукт": "яблуко", "кількість": 20, "ціна": 5},
-    {"продукт": "банан", "кількість": 10, "ціна": 3},
-    {"продукт": "не яблуко", "кількість": 50, "ціна": 20.2},
-    {"продукт": "вишня", "кількість": 100, "ціна": 12}
+    {"item_name": "яблуко", "item_quantity": 20, "item_price": 5},
+    {"item_name": "банан", "item_quantity": 10, "item_price": 3},
+    {"item_name": "не яблуко", "item_quantity": 50, "item_price": 20.2},
+    {"item_name": "вишня", "item_quantity": 100, "item_price": 12}
 ]
 
-def calculate_income(sales):
-    income = {}
+def calculate_revenue(sales):
+    revenue = {}
     for sale in sales:
-        product = sale["продукт"]
-        total = sale["кількість"] * sale["ціна"]
-        income[product] = income.get(product, 0) + total
-    return income
+        item_name = sale["item_name"]
+        total_revenue = sale["item_quantity"] * sale["item_price"]
+        revenue[item_name] = revenue.get(item_name, 0) + total_revenue
+    return revenue
 
-income_per_product = calculate_income(sales)
-high_income_products = [product for product, total in income_per_product.items() if total > 1000]
+revenue = calculate_revenue(sales)
+frequent_items = [item for item, total in revenue.items() if total > 1000]
 
-print("Дохід за продуктами:", income_per_product)
-print("Продукти з доходом > 1000:", high_income_products)
+print("Дохід за продуктами:", revenue)
+print("Продукти з доходом > 1000:", frequent_items)
